@@ -28,7 +28,9 @@
 	gulp.task('dist', ['dist:lib'])
 
 	gulp.task('dist:run', ['dist:lib'], function() {
-		if (node) node.kill()
+		if (node) {
+			node.kill()
+		}
 		node = spawn('node', ['dist/main.js'], { stdio: 'inherit' })
 		node.on('close', function(code) {
 			if (code === 8) {
@@ -52,6 +54,7 @@
 		var cp = exec(`docker build -t ${docker_image_name}:${main_version}${revision} .`)
 
 		cp.stdout.pipe(process.stdout)
+		cp.stderr.pipe(process.stderr)
 		cp.stdin.pipe(process.stdin)
 	})
 
@@ -59,12 +62,14 @@
 		var cp = exec(`docker build -t ${remote_host_name}/${docker_image_name}:${main_version}${revision} .`)
 
 		cp.stdout.pipe(process.stdout)
+		cp.stderr.pipe(process.stderr)
 		cp.stdin.pipe(process.stdin)
 
 		cp.addListener('close', function() {
 			var cp = exec(`docker push ${remote_host_name}/${docker_image_name}:${main_version}${revision}`)
 
 			cp.stdout.pipe(process.stdout)
+			cp.stderr.pipe(process.stderr)
 			cp.stdin.pipe(process.stdin)
 		})
 		cp.addListener('error', function() {
