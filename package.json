@@ -1,0 +1,27 @@
+{
+	"name": "play",
+	"author": "Marc Hayes",
+	"version": "0.0.0",
+	"description": "Basic play functionality similar to play.golang.org but local",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/curlymon/node-play.git"
+	},
+	"main": "index.js",
+	"directories": {
+		"lib": "src/js"
+	},
+	"scripts": {
+		"run": "node build/main.js",
+		"test": "gulp test"
+	},
+	"devDependencies": {
+		"@types/node": "^9.4.7",
+		"gulp": "^3.9.1",
+		"gulp-typescript": "^4.0.1",
+		"gulp-watch": "^5.0.0",
+		"typescript": "^2.7.2"
+	},
+	"dependencies": {}
+}
